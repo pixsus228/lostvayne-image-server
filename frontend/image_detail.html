@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Image Details - Image Hosting</title>
+  <link rel="icon" type="image/x-icon" href="assets/ico/fav.png">
+  <link rel="stylesheet" href="css/image_detail.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="js/image_detail.js" defer></script>
+</head>
+<body>
+<div class="page-container">
+
+  <!-- Navigation Header -->
+  <header class="header-nav">
+    <div class="nav-content">
+      <a href="upload.html" class="back-btn">
+        <i class="fas fa-arrow-left"></i>
+        <span>Back to Gallery</span>
+      </a>
+      <h1 class="page-title">Image Details</h1>
+      <div class="nav-spacer"></div>
+    </div>
+  </header>
+
+  <!-- Loading State -->
+  <div class="loading-container" id="loadingContainer">
+    <div class="loading-spinner">
+      <i class="fas fa-spinner fa-pulse fa-3x"></i>
+    </div>
+    <p class="loading-text">Loading image details...</p>
+  </div>
+
+  <!-- Error State -->
+  <div class="error-container hidden" id="errorContainer">
+    <div class="error-content">
+      <i class="fas fa-exclamation-triangle fa-3x"></i>
+      <h2>Image Not Found</h2>
+      <p class="error-message">The requested image could not be found or has been deleted.</p>
+      <a href="upload.html" class="error-back-btn">
+        <i class="fas fa-home"></i>
+        Return to Gallery
+      </a>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <main class="main-content hidden" id="mainContent">
+
+    <!-- Image Preview Section -->
+    <section class="image-preview-section">
+      <div class="image-container">
+        <div class="image-wrapper">
+          <img id="imagePreview" src="" alt="Image preview"/>
+          <div class="image-overlay">
+            <button class="fullscreen-btn" id="fullscreenBtn" title="View fullscreen">
+              <i class="fas fa-expand"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Image Information Section -->
+    <section class="image-info-section">
+      <div class="info-container">
+
+        <!-- Basic Info Card -->
+        <div class="info-card">
+          <div class="card-header">
+            <i class="fas fa-info-circle"></i>
+            <h3>Basic Information</h3>
+          </div>
+          <div class="card-content">
+            <div class="info-row">
+              <span class="info-label">Filename:</span>
+              <span class="info-value" id="infoFilename">-</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Original Name:</span>
+              <span class="info-value" id="infoOriginalName">-</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">File Size:</span>
+              <span class="info-value" id="infoFileSize">-</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">File Type:</span>
+              <span class="info-value" id="infoFileType">-</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Upload Date:</span>
+              <span class="info-value" id="infoUploadDate">-</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">ID:</span>
+              <span class="info-value" id="infoId">-</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Actions Card -->
+        <div class="info-card">
+          <div class="card-header">
+            <i class="fas fa-cog"></i>
+            <h3>Actions</h3>
+          </div>
+          <div class="card-content">
+            <div class="action-buttons">
+              <button class="action-btn primary" id="copyUrlBtn">
+                <i class="fas fa-copy"></i>
+                <span>Copy URL</span>
+              </button>
+              <button class="action-btn secondary" id="downloadBtn">
+                <i class="fas fa-download"></i>
+                <span>Download</span>
+              </button>
+              <button class="action-btn danger" id="deleteBtn">
+                <i class="fas fa-trash-alt"></i>
+                <span>Delete</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- URL Card -->
+        <div class="info-card">
+          <div class="card-header">
+            <i class="fas fa-link"></i>
+            <h3>Direct URL</h3>
+          </div>
+          <div class="card-content">
+            <div class="url-container">
+              <input type="text" id="directUrl" readonly/>
+              <button class="url-copy-btn" id="urlCopyBtn">
+                <i class="fas fa-copy"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Fullscreen Modal -->
+  <div class="fullscreen-modal hidden" id="fullscreenModal">
+    <div class="fullscreen-overlay">
+      <button class="fullscreen-close" id="fullscreenClose">
+        <i class="fas fa-times"></i>
+      </button>
+      <div class="fullscreen-content">
+        <img id="fullscreenImage" src="" alt="Fullscreen image"/>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Image Hosting</title>
+  <link rel="icon" type="image/x-icon" href="assets/ico/fav.png">
+  <link rel="stylesheet" href="css/upload.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="js/upload.js" defer></script>
+  <script src="js/tabs.js" defer></script>
+</head>
+<body>
+<div class="page-container">
+
+  <header class="header-container">
+    <h1 class="header-title">Upload Photos</h1>
+    <p class="header-subtitle">Upload selfies, memes, or any fun pictures here.</p>
+  </header>
+
+  <nav class="tabs">
+    <span class="tab active" data-tab="upload">Upload</span>
+    <span class="tab inactive" data-tab="images">Images</span>
+  </nav>
+
+  <!-- Upload Section -->
+  <section class="upload-section tab-content" id="upload-tab">
+    <div class="drop-area" id="dropArea">
+      <div class="upload-icon">
+        <i class="fas fa-cloud-upload-alt fa-3x"></i>
+      </div>
+      <div class="upload-text">
+        <p class="upload-main-text">Select a file or drag and drop here</p>
+        <p class="upload-sub-text">Only support .jpg, .png and .gif. Maximum file size is 1MB</p>
+      </div>
+    </div>
+
+    <div class="upload-button">
+      <button id="uploadBtn">Browse your file</button>
+      <input type="file" id="fileInput" accept=".jpg,.jpeg,.png,.gif" hidden/>
+    </div>
+
+    <section class="upload-result">
+      <p class="result-title">Current Upload</p>
+      <div class="result-box">
+        <input type="text" id="resultLink" placeholder="https://" readonly/>
+        <button class="copy-btn" id="copyBtn">COPY</button>
+      </div>
+    </section>
+  </section>
+
+  <!-- Images Section -->
+  <section class="images-section tab-content hidden" id="images-tab">
+    <!-- Controls Header -->
+    <div class="gallery-controls">
+      <div class="sort-controls">
+        <select id="sortSelect">
+          <option value="desc" selected>Newest First</option>
+          <option value="asc">Oldest First</option>
+        </select>
+      </div>
+      <div class="limit-controls">
+        <div class="limit-select">
+          <select id="limitSelect">
+            <option value="4">4</option>
+            <option value="8" selected>8</option>
+            <option value="12">12</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="image-gallery">
+    </div>
+
+    <!-- Gallery Divider -->
+    <div class="gallery-divider">
+      <div class="divider-line"></div>
+      <div class="divider-content">
+        <i class="fas fa-images"></i>
+      </div>
+      <div class="divider-line"></div>
+    </div>
+
+    <!-- Pagination Footer -->
+    <div class="pagination-controls">
+      <button class="pagination-btn" id="prevPage" disabled>
+        <i class="fas fa-chevron-left"></i> Previous
+      </button>
+      <div class="pagination-info">
+        Page <span id="currentPage">1</span> of <span id="totalPages">1</span>
+      </div>
+      <button class="pagination-btn" id="nextPage" disabled>
+        Next <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>
