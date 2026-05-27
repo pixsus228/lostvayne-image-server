@@ -49,3 +49,4 @@ class ImageRepository:
         
     def delete_by_id():
         ...
+
