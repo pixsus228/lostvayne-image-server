@@ -12,7 +12,7 @@ services:
       - postgres
   
   nginx:
-    image: nginx:latest # FIXME: краще використовувати певну версію
+    image: nginx:latest 
     ports:
       - "80:80" # http
       # - "443:443" # https

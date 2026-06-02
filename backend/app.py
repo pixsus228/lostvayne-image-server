@@ -1,3 +1,4 @@
+from utils.validators import validate_image
 from http.server import HTTPServer, BaseHTTPRequestHandler
 import json
 from utils.encoders import AppJSONEncoder
@@ -28,10 +29,20 @@ class ImageAPIServer(BaseHTTPRequestHandler):
         if self.path.startswith('/api/upload/'):
             self.handle_upload()
         elif self.path.startswith('/api/delete/'):
-            filename = self.path.split('/')[-1]
-            # Тут викликається логіка видалення
-            logger.info(f'Deleting file: {filename}')
-            self.send_response(204)
+            try:
+                image_id = int(self.path.split('/')[-1])
+                filename = self.repo.delete_by_id(image_id)
+                if filename:
+                    import os
+                    file_path = os.path.join('uploads', filename)
+                    if os.path.exists(file_path):
+                        os.remove(file_path)
+                    self.send_response(204)
+                else:
+                    self.send_response(404)
+            except Exception as e:
+                logger.error(f"Error deleting image: {e}")
+                self.send_response(500)
             self.end_headers()
         else:
             self.send_response(404)
@@ -42,3 +53,4 @@ if __name__ == '__main__':
     server = HTTPServer(('0.0.0.0', 8000), ImageAPIServer)
     logger.info('Server started on port 8000')
     server.serve_forever()
+
